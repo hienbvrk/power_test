@@ -12,7 +12,7 @@ class CreateCompanies extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('companys');
+        $table = $this->table('companies');
         $table->addColumn('name', 'string', [
             'default' => null,
             'limit' => 64,
