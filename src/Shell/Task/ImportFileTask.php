@@ -31,7 +31,7 @@ class ImportFileTask extends Shell
     {
         $this->path = APP . 'data' . DS;
 
-//        $this->processCSVFile();
+        $this->processCSVFile();
 
         $this->processXMLFile();
     }
@@ -49,6 +49,7 @@ class ImportFileTask extends Shell
             $conn = ConnectionManager::get('default');
             $conn->begin();
 
+            // Import companies tables
             $companies = array_unique($companies);
             foreach ($companies as $company) {
                 $data = $this->Companies->newEntity();
@@ -57,7 +58,8 @@ class ImportFileTask extends Shell
 
                 $companiesTmo[$company] = $data->id;
             }
-
+            
+            // Import areas table
             $areas = array_unique($areas);
             foreach ($areas as $area) {
                 $data = $this->Areas->newEntity();
@@ -67,6 +69,7 @@ class ImportFileTask extends Shell
                 $areasTmo[$area] = $data->id;
             }
 
+            // import transactions table
             foreach ($transactions as $transaction) {
                 $data = $this->Transactions->newEntity();
                 $data->data_id = $transaction['data_id'];
@@ -95,7 +98,6 @@ class ImportFileTask extends Shell
     private function processXMLFile()
     {
         $this->log(Xml::toArray(Xml::build($this->path . $this->xmlFiles)), 'debug');
-//        debug();
         // TODO import
     }
 

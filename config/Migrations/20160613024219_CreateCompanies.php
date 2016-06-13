@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateCompanys extends AbstractMigration
+class CreateCompanies extends AbstractMigration
 {
     /**
      * Change Method.

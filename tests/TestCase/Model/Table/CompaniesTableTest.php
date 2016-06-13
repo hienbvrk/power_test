@@ -1,14 +1,14 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\CompanysTable;
+use App\Model\Table\CompaniesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
  * App\Model\Table\CompanysTable Test Case
  */
-class CompanysTableTest extends TestCase
+class CompaniesTableTest extends TestCase
 {
 
     /**
