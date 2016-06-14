@@ -1,19 +1,19 @@
 <?php
-
 namespace App\Model\Table;
 
-use App\Model\Entity\Company;
+use App\Model\Entity\CommonInfo;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Companys Model
+ * CommonInfos Model
  *
- * @property \Cake\ORM\Association\HasMany $Transactions
+ * @property \Cake\ORM\Association\BelongsTo $Companies
+ * @property \Cake\ORM\Association\HasMany $KwhDetails
  */
-class CompaniesTable extends Table
+class CommonInfosTable extends Table
 {
 
     /**
@@ -26,14 +26,14 @@ class CompaniesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('companies');
-        $this->displayField('name');
+        $this->table('common_infos');
+        $this->displayField('id');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Transactions', [
-            'foreignKey' => 'company_id'
+        $this->hasMany('KwhDetails', [
+            'foreignKey' => 'common_info_id'
         ]);
     }
 
@@ -46,23 +46,21 @@ class CompaniesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-                ->integer('id')
-                ->allowEmpty('id', 'create');
-
-        $validator
-                ->requirePresence('name', 'create')
-                ->notEmpty('name');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
 
         return $validator;
     }
 
-    public function saveCompany($name, $code = null)
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
     {
-        $data = $this->newEntity();
-        $data->name = $name;
-        $data->code = $code;
-        $this->save($data);
-        return $data->id;
+        return $rules;
     }
-
 }
