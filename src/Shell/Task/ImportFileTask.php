@@ -15,11 +15,6 @@ use \Cake\Utility\Hash;
 
 class ImportFileTask extends Shell
 {
-    
-    const TYPE_DEMAND_PLAN = 1;
-    const TYPE_PROCUREMENT_PLAN = 2;
-    const TYPE_DEMAND_PLAN = 1;
-    const TYPE_DEMAND_PLAN = 1;
 
     public $csvFiles = 'KS001_20160531.csv';
     public $xmlFiles = 'W6_0250_20160531_00_40916_6.xml';
